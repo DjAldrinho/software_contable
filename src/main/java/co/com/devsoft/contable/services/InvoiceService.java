@@ -12,10 +12,12 @@ public class InvoiceService {
     @Autowired
     private InvoiceRepository invoiceRepository;
 
+    /** Listar factura */
     public List<Invoice> findAll(){
         return (List<Invoice>) invoiceRepository.findAll();
     }
 
+    /** Insertar factura */
     public Invoice save(Invoice entity){
         entity = invoiceRepository.save(entity);
 

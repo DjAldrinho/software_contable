@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/** Clase para convertir una peticion String a la entidad Product */
 
 @Component
 public class ProductConverter implements Converter<String, Product> {

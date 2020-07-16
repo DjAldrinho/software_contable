@@ -13,10 +13,12 @@ public class ProductService{
     @Autowired
     private ProductRepository productRepository;
 
+    /** Buscar producto por ID */
     public Optional<Product> findById(Long id){
         return productRepository.findById(id);
     }
 
+    /** Insertar producto */
     public Product save(Product entity){
         entity = productRepository.save(entity);
         return entity;

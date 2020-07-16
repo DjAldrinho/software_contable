@@ -16,6 +16,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    /** Metodo para realizar insercion de productos de prueba */
     @GetMapping("/products")
     @ResponseBody
     public String saveProducts(){
