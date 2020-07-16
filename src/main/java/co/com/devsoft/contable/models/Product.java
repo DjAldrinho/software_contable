@@ -2,7 +2,6 @@ package co.com.devsoft.contable.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,16 +16,13 @@ public class Product implements Serializable {
     private String name;
     @Column(nullable = false)
     private Character status;
-    @ManyToMany
-    List<Invoice> invoiceList;
 
     public Product() {
     }
 
-    public Product(String name, Character status, List<Invoice> invoiceList) {
+    public Product(String name, Character status) {
         this.name = name;
         this.status = status;
-        this.invoiceList = invoiceList;
     }
 
 
@@ -54,14 +50,6 @@ public class Product implements Serializable {
         this.status = status;
     }
 
-    public List<Invoice> getInvoiceList() {
-        return invoiceList;
-    }
-
-    public void setInvoiceList(List<Invoice> invoiceList) {
-        this.invoiceList = invoiceList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,13 +57,12 @@ public class Product implements Serializable {
         Product product = (Product) o;
         return getId() == product.getId() &&
                 Objects.equals(getName(), product.getName()) &&
-                Objects.equals(getStatus(), product.getStatus()) &&
-                Objects.equals(getInvoiceList(), product.getInvoiceList());
+                Objects.equals(getStatus(), product.getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getStatus(), getInvoiceList());
+        return Objects.hash(getId(), getName(), getStatus());
     }
 
     @Override
@@ -84,7 +71,6 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", status=" + status +
-                ", invoiceList=" + invoiceList +
                 '}';
     }
 }

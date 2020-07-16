@@ -26,11 +26,10 @@ public class Invoice implements Serializable {
     public Invoice() {
     }
 
-    public Invoice(String invoice, String customer, String details, List<Product> productsList) {
+    public Invoice(String invoice, String customer, String details) {
         this.invoice = invoice;
         this.customer = customer;
         this.details = details;
-        this.productsList = productsList;
     }
 
     public long getId() {
@@ -65,6 +64,14 @@ public class Invoice implements Serializable {
         this.details = details;
     }
 
+    public List<Product> getProductsList() {
+        return productsList;
+    }
+
+    public void setProductsList(List<Product> productsList) {
+        this.productsList = productsList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,13 +80,12 @@ public class Invoice implements Serializable {
         return getId() == invoice1.getId() &&
                 Objects.equals(getInvoice(), invoice1.getInvoice()) &&
                 Objects.equals(getCustomer(), invoice1.getCustomer()) &&
-                Objects.equals(getDetails(), invoice1.getDetails()) &&
-                Objects.equals(productsList, invoice1.productsList);
+                Objects.equals(getDetails(), invoice1.getDetails());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getInvoice(), getCustomer(), getDetails(), productsList);
+        return Objects.hash(getId(), getInvoice(), getCustomer(), getDetails());
     }
 
     @Override
