@@ -32,6 +32,7 @@ public class InvoiceController {
     public String saveInvoice(Invoice invoice)
     {
         try {
+            System.out.println(invoice.getProductsList());
             Invoice invoice1 = service.save(invoice);
             return "Exito: " +  invoice1.getInvoice();
         } catch (Exception e){
