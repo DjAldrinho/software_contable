@@ -22,22 +22,34 @@ public class InvoiceController {
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("invoiceList", service.findAll());
+        return  "index";
+    }
+
+    @GetMapping("/create")
+    public String createInvoice(Model model) {
        model.addAttribute("inv", new Invoice());
        model.addAttribute("selectProducts", productService.getProductList());
-       return  "index";
+       return  "create-invoice";
     }
 
     @RequestMapping(path = "/createInvoice", method = RequestMethod.POST)
-    @ResponseBody
-    public String saveInvoice(Invoice invoice)
+    public String saveInvoice(Invoice invoice, Model model)
     {
+        String message;
+
         try {
             System.out.println(invoice.getProductsList());
             Invoice invoice1 = service.save(invoice);
-            return "Exito: " +  invoice1.getInvoice();
+            message = "Factura #" +
+                    invoice1.getInvoice() + " creado con exito!";
         } catch (Exception e){
-            return "Error: " + e.getMessage();
+            message = "Error: " + e.getMessage();
         }
+
+        model.addAttribute("message", message);
+
+        return "result";
     }
 
 }
