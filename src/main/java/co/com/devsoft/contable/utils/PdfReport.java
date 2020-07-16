@@ -13,7 +13,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+/** Clase para generar Reporte en PDF*/
 public class PdfReport {
+
+
     private static final Logger logger = LoggerFactory.getLogger(PdfReport.class);
 
     public static ByteArrayInputStream invoicesReport(List<Invoice> invoices) {
@@ -23,11 +26,19 @@ public class PdfReport {
 
         try {
 
-            PdfPTable table = new PdfPTable(4);
-            table.setWidthPercentage(90);
-            table.setWidths(new int[]{5, 5, 5, 5});
+            //Abrimos el documento
+            document.open();
 
+            //Instaciamos PdfPtable con 4 Columnas
+            PdfPTable table = new PdfPTable(4);
+            //Establecemos el ancho del documento
+            table.setWidthPercentage(90);
+            //Ancho de cada columna
+            table.setWidths(new int[]{5, 5, 5, 5});
+            //Establecemos la fuente
             Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+
+            //Establecemos las cabeceras
 
             PdfPCell hcell;
 
@@ -47,6 +58,7 @@ public class PdfReport {
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
+            //Hacemos el llenado de los datos
             for (Invoice invoice : invoices) {
 
                 PdfPCell cell;
@@ -83,9 +95,10 @@ public class PdfReport {
             }
 
             PdfWriter.getInstance(document, out);
-            document.open();
+
             document.add(table);
 
+            //Cerramos el documento
             document.close();
 
         } catch (DocumentException ex) {
